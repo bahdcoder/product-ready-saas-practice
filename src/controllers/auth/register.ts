@@ -15,7 +15,8 @@ class RegisterController {
         // create user
         ctx.response.status = 201
         ctx.response.body = {
-            user
+            user,
+            token: user.getAuthToken()
         }
     }
 
