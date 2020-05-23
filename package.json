@@ -7,12 +7,31 @@
     "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.11.3",
     "@types/koa-router": "^7.4.1",
+    "@types/module-alias": "^2.0.0",
+    "ava": "^3.8.2",
     "dotenv": "^8.2.0",
     "koa": "^2.12.0",
     "koa-router": "^8.0.8",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "ava",
+    "start": "node -r module-alias/register build/index.js",
+    "dev": "nodemon -r tsconfig-paths/register src/index.ts"
+  },
+  "_moduleAliases": {
+    "@": "build/"
+  },
+  "ava": {
+    "extensions": ["ts"],
+    "require": [
+      "ts-node/register",
+      "tsconfig-paths/register"
+    ]
   }
 }
