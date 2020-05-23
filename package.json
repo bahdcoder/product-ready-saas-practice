@@ -12,6 +12,7 @@
     "@types/mongoose": "^5.7.21",
     "ava": "^3.8.2",
     "dotenv": "^8.2.0",
+    "indicative": "^7.4.4",
     "koa": "^2.12.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^8.0.8",
