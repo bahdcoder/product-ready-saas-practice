@@ -29,7 +29,7 @@ UserSchema.methods.getAuthToken = function () {
     })
 }
 
-interface UserDocument extends Mongoose.Document {
+export interface UserDocument extends Mongoose.Document {
     getAuthToken: () => string
     name: string
     email: string

@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import Bcrypt from 'bcryptjs'
 import User from '@/models/user'
+import Mailer from '@/services/mail'
 import { addMinutes } from 'date-fns'
 import Randomstring from 'randomstring'
 import { validateAll } from 'indicative/validator'
@@ -17,11 +18,15 @@ class ForgotPasswordController {
         })
 
         if (user) {
-            // send the user an email
+            const token = Randomstring.generate(64)
             user.passwordReset = {
-                token: Randomstring.generate(64),
+                token,
                 expiresAt: addMinutes(new Date(), 15)
             }
+
+            await Mailer.send('forgot-password', user, {
+                token
+            })
 
             await user.save()
         }
