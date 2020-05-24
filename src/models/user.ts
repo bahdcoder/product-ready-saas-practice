@@ -37,8 +37,8 @@ export interface UserDocument extends Mongoose.Document {
     createdAt: Date
     updatedAt: Date
     passwordReset: {
-        token: string
-        expiresAt: Date
+        token: string|null
+        expiresAt: Date|null
     }
 }
 
