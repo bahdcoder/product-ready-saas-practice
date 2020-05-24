@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/date-fns": "^2.6.0",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/koa": "^2.11.3",
@@ -12,8 +13,10 @@
     "@types/koa-router": "^7.4.1",
     "@types/module-alias": "^2.0.0",
     "@types/mongoose": "^5.7.21",
+    "@types/randomstring": "^1.1.6",
     "ava": "^3.8.2",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
     "indicative": "^7.4.4",
     "jsonwebtoken": "^8.5.1",
@@ -23,6 +26,7 @@
     "module-alias": "^2.2.2",
     "mongoose": "^5.9.15",
     "nodemon": "^2.0.4",
+    "randomstring": "^1.1.5",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.3"

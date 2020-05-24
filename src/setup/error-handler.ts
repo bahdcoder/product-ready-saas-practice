@@ -5,6 +5,7 @@ export default (app: Koa) => {
         try {
             await next()
         } catch (error) {
+            console.log(error)
             if (error.type === 'ValidationException') {
                 ctx.response.status = 422
 

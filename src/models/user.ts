@@ -14,6 +14,10 @@ const UserSchema = new Mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    passwordReset: {
+        token: String,
+        expiresAt: Date
     }
 }, { timestamps: true })
 
@@ -32,6 +36,10 @@ interface UserDocument extends Mongoose.Document {
     password: string
     createdAt: Date
     updatedAt: Date
+    passwordReset: {
+        token: string
+        expiresAt: Date
+    }
 }
 
 export default Mongoose.model<UserDocument>('User', UserSchema)
