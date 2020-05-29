@@ -29,6 +29,32 @@ UserSchema.methods.getAuthToken = function () {
     })
 }
 
+UserSchema.statics.verifyAuthToken = async function (token: string) {
+    try  {
+        Jwt.verify(token, config.jwtSecret)
+
+        const payload = Jwt.decode(token) as {
+            _id: string
+        }
+
+        const user = await this.findOne({
+            _id: payload._id
+        })
+
+        if (! user) {
+            throw new Error()
+        }
+
+        return user
+    } catch (error) {
+        return null
+    }
+}
+
+export interface UserModel extends Mongoose.Model<UserDocument> {
+    verifyAuthToken: (token: string) => Promise<null|UserDocument>
+}
+
 export interface UserDocument extends Mongoose.Document {
     getAuthToken: () => string
     name: string
@@ -42,4 +68,4 @@ export interface UserDocument extends Mongoose.Document {
     }
 }
 
-export default Mongoose.model<UserDocument>('User', UserSchema)
+export default Mongoose.model<UserDocument, UserModel>('User', UserSchema)
