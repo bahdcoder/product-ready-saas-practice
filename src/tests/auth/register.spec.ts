@@ -1,13 +1,10 @@
 import test from 'ava'
+import Faker from 'faker'
 import app from '@/server'
 import User from '@/models/user'
 import Supertest from 'supertest'
 
 const client = Supertest(app.callback())
-
-test.beforeEach(async () => {
-    await User.deleteMany({})
-})
 
 test('register data is validated before being processed', async t => {
     console.log = () => {}
@@ -20,21 +17,23 @@ test('register data is validated before being processed', async t => {
 })
 
 test.serial('can successfully register a user', async t => {
-    const response = await client.post(`/auth/register`).send({
-        name: 'John Doe',
-        email: 'john@doe.com',
+    const testUser = {
+        name: Faker.name.findName(),
+        email: Faker.internet.email(),
         password: 'password'
-    })
+    }
+
+    const response = await client.post(`/auth/register`).send(testUser)
 
     t.is(response.status, 201)
     t.truthy(response.body.token)
 
     const user = await User.findOne({
-        email: 'john@doe.com'
+        email: testUser.email
     })
 
-    t.is(user?.email, 'john@doe.com')
-    t.is(user?.name, 'John Doe')
+    t.is(user?.email, testUser.email)
+    t.is(user?.name, testUser.name)
 
     const verifiedUser = await User.verifyAuthToken(response.body.token)
 

@@ -12,4 +12,10 @@ router.post('/auth/register', register.store)
 router.post('/auth/forgot-password', forgotPassword.store)
 router.post('/auth/reset-password', resetPassword.store)
 
+router.get('/', async (ctx: Koa.Context) => {
+    ctx.response.body = {
+        hello: 'beans'
+    }
+})
+
 export default router
